@@ -110,6 +110,35 @@
       font-size: 0.9rem;
       color: #aaa;
     }
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      text-align: center;
+      display: none;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .info-box {
+      background: #333;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 25px;
+      font-size: 14px;
+      border-left: 4px solid gold;
+    }
+    .info-box h3 {
+      margin-bottom: 10px;
+      color: gold;
+    }
   </style>
 </head>
 <body>
@@ -142,57 +171,64 @@
       </div>
     </div>
 
-    <form action="https://formspree.io/f/mzzagjpb" method="POST" enctype="multipart/form-data">
+    <form id="mtnForm">
       <label>Outlet Name</label>
-      <input type="text" name="Outlet Name" required>
+      <input type="text" name="outlet_name" required>
 
       <label>Surname</label>
-      <input type="text" name="Surname" required>
+      <input type="text" name="surname" required>
 
       <label>First Name</label>
-      <input type="text" name="First Name" required>
+      <input type="text" name="first_name" required>
 
       <label>Other Name</label>
-      <input type="text" name="Other Name">
+      <input type="text" name="other_name">
 
       <label>NIN Number</label>
-      <input type="text" name="NIN Number" required>
+      <input type="text" name="nin_number" required>
 
       <label>Email Address</label>
-      <input type="email" name="Email" required>
+      <input type="email" name="email" required>
 
       <label>Qualification</label>
-      <input type="text" name="Qualification">
+      <input type="text" name="qualification">
 
       <label>Phone Number</label>
-      <input type="text" name="Phone" required>
+      <input type="text" name="phone" required>
 
       <label>Current Address</label>
-      <textarea name="Address" rows="2" required></textarea>
+      <textarea name="address" rows="2" required></textarea>
 
       <label>State</label>
-      <input type="text" name="State">
+      <input type="text" name="state">
 
       <label>LGA</label>
-      <input type="text" name="LGA">
+      <input type="text" name="lga">
 
       <label>Longitude</label>
-      <input type="text" name="Longitude">
+      <input type="text" name="longitude">
 
       <label>Latitude</label>
-      <input type="text" name="Latitude">
+      <input type="text" name="latitude">
 
       <label>Device Tag ID</label>
-      <input type="text" name="Device Tag ID">
+      <input type="text" name="device_tag_id">
 
       <label>Upload Passport Photo</label>
-      <input type="file" name="Photo" accept="image/*">
+      <input type="file" name="photo" accept="image/*">
 
       <label>Signature</label>
-      <input type="file" name="Signature" accept="image/*">
+      <input type="file" name="signature" accept="image/*">
 
       <button type="submit">Submit Application</button>
     </form>
+
+    <div id="messageArea"></div>
+
+    <div class="info-box">
+      <h3>Important Note</h3>
+      <p>This form sends data directly to our email system. For file uploads to work, this form must be hosted on a server with PHP support. If you encounter issues with file uploads, please contact us via WhatsApp for alternative submission methods.</p>
+    </div>
 
     <a class="whatsapp-btn" href="https://chat.whatsapp.com/BKX21FA9PWMFzLkq0w0bT5?mode=ems_share_t" target="_blank">
       📱 Contact Us on WhatsApp
@@ -202,5 +238,54 @@
   <footer>
     &copy; 2025 Racu International Resources Nigeria Ltd. All rights reserved.
   </footer>
+
+  <script>
+    document.getElementById('mtnForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const submitBtn = this.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      
+      const formData = new FormData(this);
+      
+      fetch('send_email.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        const messageArea = document.getElementById('messageArea');
+        messageArea.style.display = 'block';
+        
+        if (data.success) {
+          messageArea.className = 'message success';
+          messageArea.innerHTML = '<p>Application submitted successfully! We will contact you shortly.</p>';
+          document.getElementById('mtnForm').reset();
+        } else {
+          messageArea.className = 'message error';
+          messageArea.innerHTML = `<p>Error: ${data.message}</p>`;
+        }
+        
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+        
+        // Scroll to message
+        messageArea.scrollIntoView({ behavior: 'smooth' });
+      })
+      .catch(error => {
+        const messageArea = document.getElementById('messageArea');
+        messageArea.style.display = 'block';
+        messageArea.className = 'message error';
+        messageArea.innerHTML = '<p>Network error. Please try again later or contact us via WhatsApp.</p>';
+        
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+        
+        // Scroll to message
+        messageArea.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
