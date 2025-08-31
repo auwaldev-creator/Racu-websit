@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racu International Resources Nigeria Ltd</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111; /* dark background */
+      color: #f5f5f5;
+    }
+    header {
+      background: linear-gradient(90deg, gold, darkgoldenrod, #222);
+      color: #111;
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      max-height: 60px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      background: #222;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .step {
+      background: #333;
+      border-left: 4px solid gold;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .step h3 {
+      margin: 0 0 8px;
+      color: gold;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 12px;
+      font-weight: bold;
+      color: #f5f5f5;
+    }
+    input, textarea {
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #555;
+      border-radius: 6px;
+      background: #111;
+      color: #f5f5f5;
+    }
+    input:focus, textarea:focus {
+      border-color: gold;
+      outline: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background: gold;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      color: #111;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: darkgoldenrod;
+      color: #fff;
+    }
+    .whatsapp-btn {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 12px;
+      background: #25D366;
+      border-radius: 6px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .whatsapp-btn:hover {
+      background: #1DA851;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      background: #000;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Racu Logo" onerror="this.style.display='none'"/>
+    <h1>Racu International Resources Nigeria Ltd</h1>
+    <p>Trusted Partner for MTN Username Creation</p>
+  </header>
+
+  <div class="container">
+    <h2 style="color:gold; text-align:center;">MTN Username Creation Request</h2>
+    <p style="text-align:center;">Complete this form to request your MTN username creation. Ensure your details are accurate.</p>
+
+    <div class="steps">
+      <div class="step">
+        <h3>Step 1: Fill Application</h3>
+        <p>Provide complete personal details.</p>
+      </div>
+      <div class="step">
+        <h3>Step 2: Verification</h3>
+        <p>Your information will be reviewed.</p>
+      </div>
+      <div class="step">
+        <h3>Step 3: Processing</h3>
+        <p>We will process your request promptly.</p>
+      </div>
+      <div class="step">
+        <h3>Step 4: Approval</h3>
+        <p>Receive your MTN username status.</p>
+      </div>
+    </div>
+
+    <form action="https://formspree.io/f/mzzagjpb" method="POST" enctype="multipart/form-data">
+      <label>Outlet Name</label>
+      <input type="text" name="Outlet Name" required>
+
+      <label>Surname</label>
+      <input type="text" name="Surname" required>
+
+      <label>First Name</label>
+      <input type="text" name="First Name" required>
+
+      <label>Other Name</label>
+      <input type="text" name="Other Name">
+
+      <label>NIN Number</label>
+      <input type="text" name="NIN Number" required>
+
+      <label>Email Address</label>
+      <input type="email" name="Email" required>
+
+      <label>Qualification</label>
+      <input type="text" name="Qualification">
+
+      <label>Phone Number</label>
+      <input type="text" name="Phone" required>
+
+      <label>Current Address</label>
+      <textarea name="Address" rows="2" required></textarea>
+
+      <label>State</label>
+      <input type="text" name="State">
+
+      <label>LGA</label>
+      <input type="text" name="LGA">
+
+      <label>Longitude</label>
+      <input type="text" name="Longitude">
+
+      <label>Latitude</label>
+      <input type="text" name="Latitude">
+
+      <label>Device Tag ID</label>
+      <input type="text" name="Device Tag ID">
+
+      <label>Upload Passport Photo</label>
+      <input type="file" name="Photo" accept="image/*">
+
+      <label>Signature</label>
+      <input type="file" name="Signature" accept="image/*">
+
+      <button type="submit">Submit Application</button>
+    </form>
+
+    <a class="whatsapp-btn" href="https://chat.whatsapp.com/BKX21FA9PWMFzLkq0w0bT5?mode=ems_share_t" target="_blank">
+      📱 Contact Us on WhatsApp
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2025 Racu International Resources Nigeria Ltd. All rights reserved.
+  </footer>
+</body>
+</html>
