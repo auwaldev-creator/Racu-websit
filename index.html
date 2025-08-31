@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #111; /* dark background */
+      background: #111;
       color: #f5f5f5;
     }
     header {
@@ -139,6 +139,12 @@
       margin-bottom: 10px;
       color: gold;
     }
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 15px;
+      color: gold;
+    }
   </style>
 </head>
 <body>
@@ -221,6 +227,10 @@
       <input type="file" name="signature" accept="image/*">
 
       <button type="submit">Submit Application</button>
+      
+      <div id="loading" class="loading">
+        <p>Submitting your application, please wait...</p>
+      </div>
     </form>
 
     <div id="messageArea"></div>
@@ -244,8 +254,12 @@
       e.preventDefault();
       
       const submitBtn = this.querySelector('button[type="submit"]');
+      const loading = document.getElementById('loading');
+      const messageArea = document.getElementById('messageArea');
+      
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+      loading.style.display = 'block';
+      messageArea.style.display = 'none';
       
       const formData = new FormData(this);
       
@@ -255,7 +269,6 @@
       })
       .then(response => response.json())
       .then(data => {
-        const messageArea = document.getElementById('messageArea');
         messageArea.style.display = 'block';
         
         if (data.success) {
@@ -268,19 +281,18 @@
         }
         
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Application';
+        loading.style.display = 'none';
         
         // Scroll to message
         messageArea.scrollIntoView({ behavior: 'smooth' });
       })
       .catch(error => {
-        const messageArea = document.getElementById('messageArea');
         messageArea.style.display = 'block';
         messageArea.className = 'message error';
         messageArea.innerHTML = '<p>Network error. Please try again later or contact us via WhatsApp.</p>';
         
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Application';
+        loading.style.display = 'none';
         
         // Scroll to message
         messageArea.scrollIntoView({ behavior: 'smooth' });
